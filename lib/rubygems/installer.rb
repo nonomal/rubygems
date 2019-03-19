@@ -325,7 +325,11 @@ class Gem::Installer
       write_build_info_file
       run_post_build_hooks
 
-      generate_bin
+    end
+
+    generate_bin
+
+    unless @options[:install_as_default]
       write_spec
       write_cache_file
     end
