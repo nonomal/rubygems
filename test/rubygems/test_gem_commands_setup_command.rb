@@ -187,7 +187,7 @@ class TestGemCommandsSetupCommand < Gem::TestCase
     @cmd.extend FileUtils
 
     bin_dir = File.join(@gemhome, 'bin')
-    @cmd.install_default_bundler_gem
+    @cmd.install_default_bundler_gem bin_dir
 
     bundler_spec = Gem::Specification.load("bundler/bundler.gemspec")
     default_spec_path = File.join(Gem::Specification.default_specifications_dir, "#{bundler_spec.full_name}.gemspec")
@@ -195,7 +195,7 @@ class TestGemCommandsSetupCommand < Gem::TestCase
 
     spec.executables.each do |e|
       if Gem.win_platform?
-        assert_path_exists File.join(spec.bin_dir, "#{e}.bat")
+        assert_path_exists File.join(bin_dir, "#{e}.bat")
       end
 
       assert_path_exists File.join bin_dir, e
